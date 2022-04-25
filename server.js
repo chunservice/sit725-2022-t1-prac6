@@ -19,6 +19,26 @@ app.use('/api/projects',projectRoutes)
 
 app.use('/api/user',userRoute)
 
+// addNumbers
+const addNumbers = (number1, number2) => {
+    var num1 = parseInt(number1)
+    var num2 = parseInt(number2)
+    var result = (num1 + num2) || null; // if the numbers can be added together, add them together as summation. If not, return it as null
+    return result;
+}
+
+// get API
+app.get('/addTwoNumbers/:firstNumber/:secondNumber',(req,res) => {
+    var number1 = req.params.firstNumber;
+    var number2 = req.params.secondNumber;
+    var result = addNumbers(number1,number2)
+    // if the result is null, return statusCode 400
+    if(result == null) {
+        res.json({result: result, statusCode: 400}).status(400)    
+    }
+    // else return statusCode 200
+    else {res.json({result: result, statusCode: 200}).status(200)}
+})
 
 // const cardList = [    
 //     {
