@@ -1,0 +1,26 @@
+{
+  "name": "sit725-2022-t1-prac6",
+  "version": "1.0.0",
+  "description": "express app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chunservice/sit725-2022-t1-prac6.git"
+  },
+  "author": "Chun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chunservice/sit725-2022-t1-prac6/issues"
+  },
+  "homepage": "https://github.com/chunservice/sit725-2022-t1-prac6#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "materialize": "^1.0.0",
+    "mongodb": "^4.5.0"
+  }
+}
