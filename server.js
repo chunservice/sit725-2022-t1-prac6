@@ -5,6 +5,9 @@ var cors = require("cors")
 let dbConnect = require("./dbConnect");
 let projectRoutes = require("./routes/projectRoute");
 let userRoute = require("./routes/userRoute");
+let http = require('http').createServer(app);
+
+let io = require('socket.io')(http);
 
 // test and listen to the port
 app.use(express.static(__dirname+'/public'))
@@ -40,25 +43,20 @@ app.get('/addTwoNumbers/:firstNumber/:secondNumber',(req,res) => {
     else {res.json({result: result, statusCode: 200}).status(200)}
 })
 
-// const cardList = [    
-//     {
-//         title: "Orange",
-//         image: "images/orange_cut.png",
-//         link: "About Orange",
-//         description: "An orange is a fruit of various citrus species in the family Rutaceae."
-//      },
-//     {
-//        title: "Lime",
-//        image: "images/lime_cut.png",
-//        link: "About Lime",
-//        description: "A lime is a citrus fruit, which is typically round, green in color and contains acidic juice vesicles."
-//     },
-// ]
+io.on('connection', (socket) => {
+    console.log('a user connected', socket.id);
+    socket.on('disconnect',() => {
+        console.log('user disconnected');
+    });
+    setInterval(()=>{
+        socket.emit('number', new Date().toISOString());
+    }, 1000); // new Date per 1 second
+});
 
 // define the port as 3000
 var port = process.env.port || 3000;
 
-app.listen(port,()=>{
+http.listen(port,()=>{
     console.log("App listening to: "+port)
     console.log("press Ctrl + C to quit")
     // createCollection("fruits")

@@ -54,6 +54,13 @@ const addCards = function(items) {
     });
 }
 
+let socket = io();
+
+socket.on('number', (msg) =>{
+    $("#pageTitle").html("Welcome to SIT 725 Week 7: "+msg)
+}
+)
+
 $(document).ready(function(){
         $('.materialboxed').materialbox();
         $('#formSubmit').click(()=>{
